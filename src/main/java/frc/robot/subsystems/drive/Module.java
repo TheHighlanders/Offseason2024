@@ -24,7 +24,7 @@ import org.littletonrobotics.junction.Logger;
 
 public class Module {
   private static final double WHEEL_RADIUS = Units.inchesToMeters(2.0);
-  static final double ODOMETRY_FREQUENCY = 250.0;
+  static final double ODOMETRY_FREQUENCY = 50.0;
 
   private final ModuleIO io;
   private final ModuleIOInputsAutoLogged inputs = new ModuleIOInputsAutoLogged();
@@ -81,7 +81,7 @@ public class Module {
     // On first cycle, reset relative turn encoder
     // Wait until absolute angle is nonzero in case it wasn't initialized yet
     if (turnRelativeOffset == null && inputs.turnAbsolutePosition.getRadians() != 0.0) {
-      turnRelativeOffset = inputs.turnAbsolutePosition.minus(inputs.turnPosition);
+      turnRelativeOffset = inputs.turnAbsolutePosition.plus(inputs.turnPosition);
     }
 
     // Run closed loop turn control
@@ -167,6 +167,20 @@ public class Module {
     }
   }
 
+  public Rotation2d getTurnRelativeOffset() {
+    return turnRelativeOffset;
+  }
+
+  /** Returns the current turn angle of the module. */
+  public Rotation2d getAbsoluteAngleNoOffset() {
+    return inputs.turnAbsolutePositionNoOffset;
+  }
+
+  /** Returns the current turn angle of the module. */
+  public Rotation2d getAbsoluteAngle() {
+    return inputs.turnAbsolutePosition;
+  }
+
   /** Returns the current drive position of the module in meters. */
   public double getPositionMeters() {
     return inputs.drivePositionRad * WHEEL_RADIUS;
@@ -184,6 +198,14 @@ public class Module {
 
   /** Returns the module state (turn angle and drive velocity). */
   public SwerveModuleState getState() {
+    return new SwerveModuleState(getVelocityMetersPerSec(), getAngle());
+  }
+
+  public SwerveModuleState getAbsolState() {
+    return new SwerveModuleState(getVelocityMetersPerSec(), getAbsoluteAngle());
+  }
+
+  public SwerveModuleState getRelativeStateWithOffset() {
     return new SwerveModuleState(getVelocityMetersPerSec(), getAngle());
   }
 

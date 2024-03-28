@@ -150,7 +150,7 @@ public class RobotContainer {
             () -> -controller.getLeftY(),
             () -> -controller.getLeftX(),
             // () -> -controller.getRawAxis(2))); // For KB Rotation
-            ()-> -controller.getRightX()));
+            () -> -controller.getRightX()));
     controller.x().onTrue(Commands.runOnce(drive::stopWithX, drive));
     controller
         .b()

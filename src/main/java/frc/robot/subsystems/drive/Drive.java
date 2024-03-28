@@ -242,6 +242,35 @@ public class Drive extends SubsystemBase {
     return states;
   }
 
+  /** Returns the module states (turn angles and drive velocities) for all of the modules. */
+  @AutoLogOutput(key = "SwerveStates/Absolute")
+  private SwerveModuleState[] getModuleStatesAbsolute() {
+    SwerveModuleState[] states = new SwerveModuleState[4];
+    for (int i = 0; i < 4; i++) {
+      states[i] = modules[i].getAbsolState();
+    }
+    return states;
+  }
+
+  /** Returns the module states (turn angles and drive velocities) for all of the modules. */
+  @AutoLogOutput(key = "SwerveStates/Relative")
+  private SwerveModuleState[] getModuleStatesRelative() {
+    SwerveModuleState[] states = new SwerveModuleState[4];
+    for (int i = 0; i < 4; i++) {
+      states[i] = modules[i].getRelativeStateWithOffset();
+    }
+    return states;
+  }
+
+  @AutoLogOutput(key = "AbsolPositions")
+  private double[] getModuleAbsoluteDegrees() {
+    double[] out = new double[4];
+    for (int i = 0; i < 4; i++) {
+      out[i] = modules[i].getAbsoluteAngleNoOffset().getDegrees();
+    }
+    return out;
+  }
+
   /** Returns the module positions (turn angles and drive positions) for all of the modules. */
   private SwerveModulePosition[] getModulePositions() {
     SwerveModulePosition[] states = new SwerveModulePosition[4];
