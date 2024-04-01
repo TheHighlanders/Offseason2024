@@ -13,12 +13,8 @@
 
 package frc.robot;
 
-import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
-import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -38,6 +34,8 @@ import frc.robot.subsystems.flywheel.Flywheel;
 import frc.robot.subsystems.flywheel.FlywheelIO;
 import frc.robot.subsystems.flywheel.FlywheelIOSim;
 import frc.robot.subsystems.flywheel.FlywheelIOSparkMax;
+import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
+import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -135,13 +133,12 @@ public class RobotContainer {
     autoChooser.addOption(
         "Flywheel SysId (Dynamic Reverse)", flywheel.sysIdDynamic(SysIdRoutine.Direction.kReverse));
     autoChooser.addOption(
-        "Drive SysID (Quad Test)", Commands.sequence(
+        "Drive SysID (Quad Test)",
+        Commands.sequence(
             drive.sysIdQuasistatic(SysIdRoutine.Direction.kForward),
             drive.sysIdQuasistatic(SysIdRoutine.Direction.kReverse),
             drive.sysIdDynamic(SysIdRoutine.Direction.kForward),
-            drive.sysIdDynamic(SysIdRoutine.Direction.kReverse))
-            );
-
+            drive.sysIdDynamic(SysIdRoutine.Direction.kReverse)));
     // Configure the button bindings
     configureButtonBindings();
   }

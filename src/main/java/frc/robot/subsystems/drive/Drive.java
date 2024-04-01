@@ -111,7 +111,7 @@ public class Drive extends SubsystemBase {
         new SysIdRoutine(
             new SysIdRoutine.Config(
                 null,
-                null,
+                Volt.of(2.5),
                 Seconds.of(5),
                 (state) -> Logger.recordOutput("Drive/SysIdState", state.toString())),
             new SysIdRoutine.Mechanism(
@@ -295,6 +295,8 @@ public class Drive extends SubsystemBase {
   public void setPose(Pose2d pose) {
     poseEstimator.resetPosition(rawGyroRotation, getModulePositions(), pose);
   }
+
+  /** Resets Gyro Angle for Driving */
 
   /**
    * Adds a vision measurement to the pose estimator.
