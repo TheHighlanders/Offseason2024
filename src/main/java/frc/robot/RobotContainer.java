@@ -132,6 +132,9 @@ public class RobotContainer {
         "Flywheel SysId (Dynamic Forward)", flywheel.sysIdDynamic(SysIdRoutine.Direction.kForward));
     autoChooser.addOption(
         "Flywheel SysId (Dynamic Reverse)", flywheel.sysIdDynamic(SysIdRoutine.Direction.kReverse));
+    autoChooset.addOption(
+        "Drive SysID (Quad Test)", new SequentialCommandGroup(drive.sysIdQuasistatic(SysIdRoutine.Direction.kForward),drive.sysIdQuasistatic(SysIdRoutine.Direction.kReverse),
+                                                              drive.sysIdDynamic(SysIdRoutine.Direction.kForward),drive.sysIdDynamic(SysIdRoutine.Direction.kReverse));
 
     // Configure the button bindings
     configureButtonBindings();
