@@ -1,0 +1,25 @@
+{
+    "name": "Slink",
+    "rotations": [{"axis" : "x", "degrees" : 90}, {"axis" : "z", "degrees" : 180}], 
+    "position": [-0.3429, -0.3429, 0.1],
+    "cameras": [
+      {
+        "name": "Right Eye",
+        "rotations": [{ "axis": "y", "degrees": -25 }, { "axis": "z", "degrees": -25 }],
+        "position": [0.233, -0.288, 0.259],
+        "resolution": [1280, 720], 
+        "fov": 70 
+      },
+      {
+        "name": "Left Eye",
+        "rotations": [{ "axis": "y", "degrees": -25 }, { "axis": "z", "degrees": 25 }],
+        "position": [0.233, 0.288, 0.259],
+        "resolution": [1280, 720], 
+        "fov": 70 
+      }
+    ],
+    "components": [{
+      "zeroedRotations":[{"axis": "x", "degrees" : 90}],
+      "zeroedPositions" : [0,0,0]
+    }]
+  }
